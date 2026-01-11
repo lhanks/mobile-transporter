@@ -5,6 +5,11 @@ vendor/
 # Build outputs
 dist/
 build/
+
+# Uploaded files
+uploads/
+
+# Binaries
 *.exe
 *.dll
 *.so
