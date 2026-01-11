@@ -1,45 +1,44 @@
-# Mobile Transporter - Ralph Loop Prompt
+# Mobile Transporter - Ralph Story Processor
 
-## Project Overview
+## Workflow
 
-Mobile Transporter is a [DESCRIBE YOUR PROJECT HERE].
+1. Check `.ai/stories/backlog/` for unprocessed story files
+2. Pick the first story (alphabetically by filename)
+3. Implement the story requirements
+4. Commit the changes with the story ID in the commit message
+5. Move the story file to `.ai/stories/processed/`
+6. If more stories remain in backlog, continue to next iteration
+7. When backlog is empty, output `<promise>ALL STORIES COMPLETE</promise>`
 
-## Current Objective
+## Story File Format
 
-[DESCRIBE WHAT YOU WANT RALPH TO WORK ON]
+Each story file in `.ai/stories/backlog/` follows this format:
+- Filename: `{STORY-ID}.md` (e.g., `MT-001.md`, `MT-002.md`)
+- Contains: Title, description, acceptance criteria, technical notes
 
-## Success Criteria
+## Implementation Rules
 
-When the following are ALL true, output `<promise>OBJECTIVE COMPLETE</promise>`:
+1. **One story per iteration** - Complete and commit one story before moving to next
+2. **Atomic commits** - Each story gets its own commit with message: `feat({story-id}): {title}`
+3. **Move after commit** - Only move story to processed/ AFTER successful commit
+4. **Follow existing patterns** - Match the project's code style and architecture
+5. **Test coverage** - Add tests for new functionality
 
-1. [ ] Criterion 1
-2. [ ] Criterion 2
-3. [ ] Criterion 3
+## Current State Check
 
-## Constraints
+Before starting work:
+1. List files in `.ai/stories/backlog/` to see pending stories
+2. List files in `.ai/stories/processed/` to see completed stories
+3. Check git log for recent commits
 
-- Follow existing code patterns
-- Maintain test coverage
-- Don't break existing functionality
+## Completion Promise
 
-## Context
+Output `<promise>ALL STORIES COMPLETE</promise>` ONLY when:
+- `.ai/stories/backlog/` is empty (no more stories to process)
+- All processed stories have been committed
 
-### Tech Stack
-- [LIST YOUR TECHNOLOGIES]
-
-### Key Files
-- [LIST IMPORTANT FILES TO FOCUS ON]
-
-## Instructions
-
-1. Read the project state and previous work
-2. Identify what's already done vs remaining
-3. Work on the next logical step
-4. Commit meaningful progress
-5. If ALL success criteria are met, output the completion promise
-6. Otherwise, continue iterating
+Do NOT output the promise if there are still stories in backlog.
 
 ---
 
-*This prompt is fed repeatedly to Claude in a Ralph loop.*
-*Each iteration, Claude sees its previous work and builds on it.*
+*This prompt processes user stories one at a time, committing each before moving to the next.*
