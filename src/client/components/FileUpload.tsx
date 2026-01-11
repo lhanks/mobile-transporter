@@ -105,17 +105,17 @@ export function FileUpload() {
           border-2 border-dashed rounded-lg p-8 text-center cursor-pointer
           transition-colors duration-200
           ${isDragging
-            ? 'border-blue-500 bg-blue-50'
-            : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
+            ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20'
+            : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800'
           }
         `}
       >
         <div className="space-y-2">
           <div className="text-4xl">📁</div>
-          <p className="text-gray-600">
-            Drag files here or <span className="text-blue-600">click to select</span>
+          <p className="text-gray-600 dark:text-gray-300">
+            Drag files here or <span className="text-blue-600 dark:text-blue-400">click to select</span>
           </p>
-          <p className="text-xs text-gray-400">Max file size: 100MB</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500">Max file size: 100MB</p>
         </div>
         <input
           ref={fileInputRef}
@@ -130,16 +130,16 @@ export function FileUpload() {
       {uploads.length > 0 && (
         <div className="space-y-2">
           {uploads.map((upload) => (
-            <div key={upload.id} className="bg-white rounded border p-3">
+            <div key={upload.id} className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-3">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm text-gray-700 truncate">{upload.name}</span>
-                <span className="text-xs text-gray-500">
+                <span className="text-sm text-gray-700 dark:text-gray-200 truncate">{upload.name}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">
                   {upload.status === 'uploading' && `${Math.round(upload.progress)}%`}
                   {upload.status === 'done' && '✓'}
                   {upload.status === 'error' && '✗'}
                 </span>
               </div>
-              <div className="w-full bg-gray-200 rounded-full h-1.5">
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                 <div
                   className={`h-1.5 rounded-full transition-all duration-300 ${
                     upload.status === 'error'
@@ -161,8 +161,8 @@ export function FileUpload() {
         <div
           className={`p-3 rounded text-sm ${
             message.type === 'success'
-              ? 'bg-green-50 text-green-700'
-              : 'bg-red-50 text-red-700'
+              ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400'
+              : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400'
           }`}
         >
           {message.text}

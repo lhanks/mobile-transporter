@@ -66,7 +66,7 @@ router.delete('/:id', (req, res) => {
 });
 
 // Multer error handling middleware
-router.use((err: Error & { code?: string }, req: Express.Request, res: Express.Response, next: Function) => {
+router.use((err: Error & { code?: string }, _req: Express.Request, res: Express.Response, next: Function) => {
   if (err.code === 'LIMIT_FILE_SIZE') {
     (res as any).status(413).json({ error: 'File too large' });
     return;
