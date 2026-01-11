@@ -1,7 +1,11 @@
 import express from 'express';
+import { initUploadsDir } from './services/fileService.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+// Initialize uploads directory
+initUploadsDir();
 
 app.use(express.json());
 
