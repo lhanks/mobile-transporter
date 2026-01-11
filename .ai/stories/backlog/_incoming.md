@@ -19,3 +19,4 @@
 - Add dark mode to the app. → MT-111
 - deploy to vercel → MT-112
 - sd: create a spec for a marketing website for the app. → MT-113
+- ta: create a task list for the website spec. → MT-114
