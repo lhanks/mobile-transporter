@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 import { fileService, type MulterFile } from '../services/fileService.js';
+import { io } from '../index.js';
 
 const router = Router();
 
@@ -40,6 +41,8 @@ router.post('/', upload.single('file'), (req, res) => {
 
   try {
     const metadata = fileService.saveFile(req.file as MulterFile);
+    // Broadcast to all connected clients
+    io.emit('file:added', { file: metadata });
     res.status(201).json(metadata);
   } catch (error) {
     console.error('Upload error:', error);
@@ -49,13 +52,16 @@ router.post('/', upload.single('file'), (req, res) => {
 
 // DELETE /api/files/:id - Delete a file
 router.delete('/:id', (req, res) => {
-  const deleted = fileService.deleteFile(req.params.id);
+  const fileId = req.params.id;
+  const deleted = fileService.deleteFile(fileId);
 
   if (!deleted) {
     res.status(404).json({ error: 'File not found' });
     return;
   }
 
+  // Broadcast to all connected clients
+  io.emit('file:removed', { id: fileId });
   res.status(204).send();
 });
 
