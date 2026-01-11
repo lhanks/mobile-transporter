@@ -105,6 +105,35 @@ uploads/            # Uploaded files storage
 - `file:added` - New file uploaded
 - `file:removed` - File deleted
 
+## Deployment
+
+### CI/CD Pipeline
+
+The project uses GitHub Actions for continuous integration:
+
+- **On Pull Request**: Runs type checking and build verification
+- **On Push to main/master**: Deploys to Vercel production
+
+### Vercel Setup
+
+1. Create a new project on [Vercel](https://vercel.com)
+2. Connect your GitHub repository
+3. Add the following secrets to your GitHub repository:
+   - `VERCEL_TOKEN` - Your Vercel API token
+   - `VERCEL_ORG_ID` - Your Vercel organization ID
+   - `VERCEL_PROJECT_ID` - Your Vercel project ID
+
+To get these values:
+```bash
+npm i -g vercel
+vercel login
+vercel link  # This creates .vercel/project.json with org and project IDs
+```
+
+### Architecture Note
+
+This app uses WebSockets for real-time updates. Vercel deploys the static frontend only. For full functionality, deploy the backend to a service that supports WebSockets (Railway, Render, Fly.io).
+
 ## License
 
 MIT
